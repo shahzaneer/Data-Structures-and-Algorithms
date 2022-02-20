@@ -1,0 +1,18 @@
+Advantages of C/C++
+There are 1000s of good reasons to learn C++ Programming. C++ is a MUST for 
+students and working professionals to become a great Software Engineer. Some of the 
+key advantages of learning C++:
+• C++ is a statically typed, compiled, general-purpose, case-sensitive, free-form 
+programming language that supports procedural, object-oriented, and generic 
+programming.
+• C++ is regarded as a middle-level language, as it comprises a combination of 
+both high-level and low-level language features.
+• C++ is very close to hardware, so you get a chance to work at a low level which 
+gives you lot of control in terms of memory management, better performance and 
+finally a robust software development.
+• C++ is one of the ever-green programming languages and loved by millions of 
+software developers. 
+• C++ is the most widely used programming languages in application and system 
+programming. 
+• C++ teaches you the difference between compiler, linker and loader, different data 
+types, storage classes, variable types their scopes etc.
