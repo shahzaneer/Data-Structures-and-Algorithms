@@ -1,7 +1,12 @@
 #include <iostream>
 using namespace std;
+
 //* linear Search --> ismain aik aik kr k har element ko check krte hain
 //* jahan mil jayegi key wahan return krte hain!
+
+// ? Time Complexity --> O(n) 
+
+// (as the loop traverses through the whole array);
 
 
 int linearSearch(int  arr [], int n, int key){
