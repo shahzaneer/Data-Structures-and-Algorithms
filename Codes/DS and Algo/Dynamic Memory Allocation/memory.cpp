@@ -27,9 +27,11 @@ int main(){
     delete pointerVar; //isne memory ko khtm krdia hai 
 
     cout<<*pointerVar<<endl; 
-    
+
 //it will generate a garbage value q k jo 
 //  hmne memory allocate ki thi usse delete krdia hai
+
+
 
 
 
