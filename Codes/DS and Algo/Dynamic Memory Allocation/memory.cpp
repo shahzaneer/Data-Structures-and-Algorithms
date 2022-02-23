@@ -9,6 +9,7 @@ using namespace std;
 int main(){
     int *pointerVar;
 
+
     pointerVar = new int;
     //yani main keh rha hun k pointerVar ki
     //jo value hai na uske liay aik int data type
