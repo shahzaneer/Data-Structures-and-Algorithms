@@ -20,7 +20,9 @@ int binarySearch(int arr [] , int n, int key){
     int high = n;
     
     while(low<=high){
-        int mid = low+high/2;
+        // int mid = low+high/2; // it depends upon the size of array!
+        // another efficient way is
+        int mid = low + ((high-low)/2);
         if(arr[mid]==key){
             return mid;
         }
