@@ -112,7 +112,7 @@ int main()
     // deleteLastNode(first);
     // deleteAtPosition(first,2);
     // deleteLastNode(first);
-    deleteAtValue(first, 30);
+    deleteAtValue(first, 99);
     Traversal(first);
 
     return 0;
