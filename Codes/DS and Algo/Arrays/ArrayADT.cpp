@@ -51,7 +51,8 @@ void createArray(myArray *ptr , int tSize , int uSize){
     void showAddresses(myArray *ptr){
 
         for(int i=0;i<ptr->used_Size;i++){
-            cout<<((*ptr).p + i)<<endl;
+            // cout<<((*ptr).p + i)<<endl;
+            cout<<(ptr->p+i)<<endl;
         }
     }
 
