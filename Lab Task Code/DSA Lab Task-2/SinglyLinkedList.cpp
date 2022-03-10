@@ -121,6 +121,9 @@ void deleteAtValue(Node *header, int value)
     Node *q = header->next;
     while (q->data != value && q->next != NULL)
     {
+        //* second statement of while is liay q k ager q k next main null aagya tou mtlb akhiri position hogi
+        //* aur akhiri per tou hamara method alag bana hua hai
+        
         p = p->next;
         q = q->next;
     }
