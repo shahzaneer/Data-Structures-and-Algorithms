@@ -11,7 +11,7 @@ struct Node{
 // we know that same type of pointer can point a data type
 // tou node ko point krne k liay node type ka pointer banana hoga
     int data;
-    Node *next; 
+    Node *next; //self referencial pointer.
     
 };
 

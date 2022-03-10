@@ -19,11 +19,11 @@ Node* insertAtFirstPlace(Node *head,int value){
     newNode->data = value;    //us newNode k data main value dedo 
     newNode->next = head;     //us newNode k next address main mojuda head ka address dedo
 
-    return newNode; // is newNode k address ko return krdo.
+    return newNode; // is newNode k address ko return krdo ab yehi head hoga!.
 
 
 }
-void insertAtLastPlaceWithReference(Node *head,Node *tail,int value){
+void insertAtLastPlaceWithReference(Node *tail,int value){
     Node *newNode = new Node;
     tail->next = newNode;
     newNode->next = NULL;
@@ -120,10 +120,10 @@ int main(){
 
     // Traversal(first);
     // first = insertAtFirstPlace(first,5);
-    // insertAtLastPlace(first,third,50);
+    // insertAtLastPlace(third,50);
     // insertLastWithoutReference(first,55);
-    // insertAtPosition(first,2,66);
-    insertBeforePosition(first,3,88);
+    insertAtPosition(first,3,66);
+    // insertBeforePosition(first,3,88);
     // insertAtPosition(first,2,88);
     // insertAfterPosition(first,2,77);
 
