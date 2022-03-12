@@ -2,7 +2,7 @@
 - This repository includes all the Data Structures and Algorithms I have explored till Date!
 
 # What are Data Structures?
-- The structures which are sused to store data effectively and efficiently are known as Data Structures.
+- The structures which are used to store data effectively and efficiently are known as Data Structures.
 # What is Algorithm?
 - Step by Step solution to a proposed problem is known as an Algorithm.
 # Why DSA? 
@@ -14,6 +14,6 @@
 using namespace std;
 
 int main(){
-  cout<<"Shahzaneer Ahmed taking on Data Structures";
+  cout<<"Shahzaneer Ahmed taking on Data Structures and Algorithm";
   }
 ```
