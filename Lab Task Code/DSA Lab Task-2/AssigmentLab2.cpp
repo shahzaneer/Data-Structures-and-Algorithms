@@ -1,114 +1,169 @@
+//!---------------------------------------------------
+//! Name :             Shahzaneer Ahmed              |
+//! Registration No:   SP21-BCS-087                  |
+//! Lab Assignment:    Singly-Linked-List            |
+//!--------------------------------------------------- 
 
 //? Assignment:
 //* 1) Print Linked List in Reverse order (iterative & recursive)
-// 2) print linked list in such order that: print first and last node,
-// print second and second last node then print 3rd and 3rd last node and so on.....
-// 3) Check that the given linked list is palindrome or not
-// 4) Swap the values of any 2 given nodes like 2nd and 6th, 5th and 9th, 7th and 3rd etc
+//* 2) print linked list in such order that: print first and last node,
+//* print second and second last node then print 3rd and 3rd last node and so on.....
+//* 3) Check that the given linked list is palindrome or not
+//* 4) Swap the values of any 2 given nodes like 2nd and 6th, 5th and 9th, 7th and 3rd etc
+
 
 #include <iostream>
 using namespace std;
 
+// Singly linkedList's Node data Type definition
 struct Node
 {
-    // Singly linkedList's Node data Type definition
     int data;
     Node *next;
 };
 
+// It is used for printing the linkedlist
 void Traversal(Node *head)
 {
     while (head != NULL)
     {
-        // jese hi head null hoga mtlb k aagay koi element mojud nhi hai!
         cout << head->data << endl;
         head = head->next;
     }
 }
-void insertAtEnd(Node *head, int value)
-{
-    Node *newNode = new Node;
-    Node *ModifiedHead = head;
 
-    while (ModifiedHead->next != NULL)
-    {
-        ModifiedHead = ModifiedHead->next;
+// It is used to add elements in the linkedlist 
+Node* insertAtLast(Node *head , int value){
+    Node *newNode = new Node;
+    Node *p = head;
+    if(head == NULL){
+        newNode->data = value;
+        newNode->next = NULL;
+        return newNode;
     }
-    ModifiedHead->next = newNode;
+    while(p->next!=NULL){
+        p = p->next;
+    }
+    p->next = newNode;
     newNode->data = value;
     newNode->next = NULL;
-}
-
-
-Node* reverseOrderTraversal(Node *head){
-    Node *current, *prev , *newNext;
-    prev = NULL;
-    current = head;
-
-    while(current!=NULL){
-        newNext = current->next;
-        // cout<<"A"<<endl;
-        current->next = prev;
-        // cout<<"B"<<endl;
-        prev = current;
-        // cout<<"C"<<endl;
-        current = newNext;
-        // cout<<"D"<<endl;
-
-    }
-
-// we have to return previous because jb tk current main null ayega tb tk previous last node per hoga jisse hamain printing shuru krni hai.
-    return prev;
+    return head;
 }
 
 //* LinkedList in Reverse Order (iterative)
+Node* Reverse(Node *head){
+    Node *previous,*current,*newNext;
+    previous = NULL;
+    current = head;
+
+    while(current!=NULL){
+        // yeh hai connecting
+        newNext = current->next;
+        current->next = previous;
+
+        // yeh hai moving next
+        previous = current;
+        current = newNext;
+    }
+
+    return previous;
+
+}
+
+
 //* LinkedList in Reverse Order (recursive)
+
+
 //* Palindrome Checking
+Node* Mid(Node *head){
+    Node *slow = head;
+    Node *fast = head;
+
+    while(fast!=NULL && fast->next!=NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+bool isPalindrome(Node *head){
+    Node *current = head;
+    Node *mid = Mid(head);
+    Node *last = Reverse(mid->next);
+
+    while (last!=NULL)
+    {
+        if(current->data!= last->data){
+            return false;
+        }
+        else{
+            current = current->next;
+            last = last->next;
+        }
+    }
+    return true;
+    
+}
+
+//* Printing in a specific Manner
+void printInOrder(Node *head){
+    Node *p = head; 
+    Node *m = Mid(head);
+    Node *q = Reverse(m); 
+    
+    while(q!=NULL){
+
+        cout<<p->data<<endl;
+        p = p->next;
+        if(p->data!=q->data) //this if is jugaar :(
+        cout<<q->data<<endl;
+        q = q->next;
+    
+    }
+        
+}
+
+
 // * Swapping values of two nodes.
+void swapTwoValues(Node *head, int pos1 , int pos2){
+
+    Node *f = head;
+    Node *s = head;
+
+    int i=1,j=1;
+    while(i<pos1){
+        f = f->next;
+        i++;
+    }
+    while(j<pos2){
+        s = s->next;
+        j++;
+    }
+
+    // swapping logic
+    int temp;
+    temp = f->data;
+    f->data = s->data;
+    s->data = temp;
+}
+
+
 
 int main()
 {
-    //* Manually Making a linkedlist of 4 Elements thorugh DMA
+    Node *head = NULL;
+    head = insertAtLast(head,1);
+    head = insertAtLast(head,2);
+    head = insertAtLast(head,3);
+    head = insertAtLast(head,4);
+    head = insertAtLast(head,5);
+    head = insertAtLast(head,6);
+    head = insertAtLast(head,7);
+    head = insertAtLast(head,8);
+    head = insertAtLast(head,9);
 
-    Node *first = new Node;
-    Node *second = new Node;
-    Node *third = new Node;
-    Node *fourth = new Node;
-
-    // Connecting first and second
-    first->data = 10;
-    first->next = second;
-
-    // Connecting second and third
-    second->data = 20;
-    second->next = third;
-
-    // Connecting third and fourth
-    third->data = 30;
-    third->next = fourth;
-
-    // Terminating the linkedlist on the fourth Node
-    fourth->data = 66;
-    fourth->next = NULL;
-
-    // Normal traversal
-    // Traversal(first);
-
-    
-    Node *head = first;
-
-    // adding further Nodes in the linkedlist
-    insertAtEnd(head,12);
-    insertAtEnd(head,44);
-    insertAtEnd(head,33);
-    insertAtEnd(head,11);
-    insertAtEnd(head,22);
-    // Traversal(head);
-    // head =  reverseOrderTraversal(first);
-    // Traversal(head);
-
-    
-    
+    Traversal(head);
 
     return 0;
 }
