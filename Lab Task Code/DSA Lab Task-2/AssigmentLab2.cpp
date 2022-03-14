@@ -72,7 +72,17 @@ Node* Reverse(Node *head){
 
 
 //* LinkedList in Reverse Order (recursive)
+Node* recursiveReverse(Node *head){
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
 
+    Node *newHead = recursiveReverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return newHead;
+
+}
 
 //* Palindrome Checking
 Node* Mid(Node *head){
