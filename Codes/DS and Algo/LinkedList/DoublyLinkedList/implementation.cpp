@@ -4,6 +4,7 @@ using namespace std;
 struct Node{
     int data;
     Node *next;
+    Node *previous; //this address part is extra in case od doubly!
 };
 // Inserting
 insertAtEnd();
@@ -19,6 +20,7 @@ deleteWithKey();
 
 // Traversal
 normalTraversal();
+reverseTraversal();
 twoWaysTraversal();
 
 int main(){
