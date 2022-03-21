@@ -205,7 +205,22 @@ Node* deleteWithKey(Node *last , int key){
 
 // Reversal of linked list
 Node* reverse(Node *last){
+    Node *q,*previous, current,newNext;
+    q = last->next;
+    previous = last->next;
+    current = previous->next;
+    newNext = current->next;
 
+    while(newNext!= q){
+        current->next = previous;
+        newNext->next = current;
+
+        previous = current;
+        current = newNext;
+        newNext = newNext->next;
+    }
+
+    return newNext;
 }
 
 
