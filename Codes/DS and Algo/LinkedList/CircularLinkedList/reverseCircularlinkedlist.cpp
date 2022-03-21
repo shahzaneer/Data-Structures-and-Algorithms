@@ -34,6 +34,24 @@ void Traversal(Node *last){
     }while(p!=last->next);
 }
 
+Node* reverse(Node *last){
+    if(last == 0){
+        return last;
+    }
+    Node *previous, *current , *nextNode;
+    current = last->next; //first element
+
+    while(current!=last){
+        previous = current;
+        current = nextNode;
+        nextNode = current->next;
+        current->next = previous;
+    }
+    // last link attachement
+    nextNode->next = last;
+    return nextNode;
+}
+
 int main(){
     Node *last = NULL;
     last = insertAtEnd(last,1);
@@ -42,6 +60,7 @@ int main(){
     last = insertAtEnd(last,4);
     last = insertAtEnd(last,5);
     last = insertAtEnd(last,6);
+    last = reverse(last);
     Traversal(last);
     
 
