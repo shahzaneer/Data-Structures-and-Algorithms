@@ -33,7 +33,6 @@ void Traversal(Node *last){
         p = p->next;
     }while(p!=last->next);
 }
-
 Node* reverse(Node *last){
     if(last == 0){
         return last;
@@ -52,6 +51,19 @@ Node* reverse(Node *last){
     return nextNode;
 }
 
+//TODO: This two way Traversal is not working!
+void twoWaysTraversal(Node *last){
+    Traversal(last);
+    Node *Pointer;
+    Pointer = reverse(last);
+    Traversal(Pointer);
+
+    
+}
+
+
+
+
 int main(){
     Node *last = NULL;
     last = insertAtEnd(last,1);
@@ -60,8 +72,9 @@ int main(){
     last = insertAtEnd(last,4);
     last = insertAtEnd(last,5);
     last = insertAtEnd(last,6);
-    last = reverse(last);
-    Traversal(last);
+    // last = reverse(last);
+    // Traversal(last);
+    twoWaysTraversal(last);
     
 
     return 0;

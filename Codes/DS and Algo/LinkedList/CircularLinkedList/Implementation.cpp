@@ -205,21 +205,16 @@ Node* deleteWithKey(Node *last , int key){
 
 // Reversal of linked list
 Node* reverse(Node *last){
-    Node *q,*previous, current,newNext;
-    q = last->next;
-    previous = last->next;
-    current = previous->next;
-    newNext = current->next;
+    Node *previous, *current, *newNext;
+    current = last -> next;
 
-    while(newNext!= q){
-        current->next = previous;
-        newNext->next = current;
-
+    while(current != last){
         previous = current;
         current = newNext;
-        newNext = newNext->next;
+        newNext = current->next;
+        current->next = previous;
     }
-
+    newNext->next = last;
     return newNext;
 }
 
@@ -250,15 +245,15 @@ void twoWaysTraversal(Node *last){
     Node *current = last->next;
     do
     {
-        cout<<current->next<<endl;
+        cout<<current->data<<endl;
         current = current->next;
     } while (current!=last->next);
 
     last = reverse(last);
-     *current = last->next;
+    current = last->next;
     do
     {
-        cout<<current->next<<endl;
+        cout<<current->data<<endl;
         current = current->next;
     } while (current!=last->next);
 
@@ -348,7 +343,11 @@ int main(){
         case 10:{
             normalTraversal(last);
             break;
-        } 
+        }
+        case 11:{
+            twoWaysTraversal(last);
+            break;
+        }
 
     }
     
