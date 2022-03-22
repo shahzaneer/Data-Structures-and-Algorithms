@@ -5,6 +5,9 @@
 - The structures which are used to store data effectively and efficiently are known as Data Structures.
 # What is Algorithm?
 - Step by Step solution to a proposed problem is known as an Algorithm.
+***
+![Coding is life](img.jpg)
+***
 # Why DSA? 
 - It improves your logic building , time and space complexity of your code.
 - Simply it helps you to make your code scallable and efficient.
