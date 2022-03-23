@@ -130,21 +130,47 @@ void deleteAtPosition(Node *head , int position){
     delete(f);
 }
 Node* deleteWithKey(Node *head , int key){
+    // if head is NULL;
+    if(head == NULL){
+        return head;
+    }
     // delete at start logic
     if(head->data == key){
-
+        Node *p = head;
+        head = head->next;
+        head->previous = NULL;
+        p->next = NULL;
+        p->previous = NULL;
+        delete (p);
+        return head;
     }
     // delete at end logic
     Node*p = head;
     while(p->next!= NULL){
         p = p->next;
     }
+    if (p->data == key){
 
-    else if(p->data == key){
-
+        Node *q = p->previous;
+        q->next = NULL;
+        p->previous = NULL;
+        delete(p);
+        return head;
     }
     // delete somewhere in between the nodes
-    
+    p = head->next;
+    while(p->data!=key){
+        p = p->next;
+    }
+    Node *q = p->previous;
+    Node *r = p->next;
+    q->next = r;
+    r->previous = q;
+    p->next = NULL;
+    p->previous = NULL;
+    delete(p);
+    return head;
+
 }
 
 // Traversal
@@ -156,8 +182,20 @@ void normalTraversal(Node *head){
     }
 
 }
-// reverseTraversal();
-// twoWaysTraversal();
+void reverseTraversal(Node *head){
+    Node *p = head;
+    while(p->next!=NULL){
+        p=p->next;
+    }
+    while(p!=NULL){
+        cout<<p->data<<endl;
+        p = p->previous;
+    }
+}
+void twoWaysTraversal(Node *head){
+    normalTraversal(head);
+    reverseTraversal(head);
+}
 
 int main(){
     Node *head = NULL;
@@ -169,17 +207,19 @@ int main(){
     head = insertAtEnd(head,3);
     head = insertAtEnd(head,4);
     head = insertAtEnd(head,5);
-    head = insertAtStart(head,12);
-    insertAtPosition(head,1,3);
-    insertAfterPosition(head,555,4);
-    insertBeforePosition(head,777,4);
-    head = deleteFromFirst(head);
-    deleteFromLast(head);
-    deleteFromLast(head);
-    deleteAtPosition(head,2);
+    // head = insertAtStart(head,12);
+    // insertAtPosition(head,1,3);
+    // insertAfterPosition(head,555,4);
+    // insertBeforePosition(head,777,4);
+    // head = deleteFromFirst(head);
+    // deleteFromLast(head);
+    // deleteFromLast(head);
+    // deleteAtPosition(head,2);
+// head = deleteWithKey(head,5);
 
-
-    normalTraversal(head);
+    // normalTraversal(head);
+    // reverseTraversal(head);
+    twoWaysTraversal(head);
 
 
 
