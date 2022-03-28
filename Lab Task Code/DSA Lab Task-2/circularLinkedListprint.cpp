@@ -65,15 +65,7 @@ int main(){
 
         case 5:
         {
-            MergeLast =  merge(last1,last2);
-            break;
-
-        }
-        
-
-        case 6:
-        {
-            display(MergeLast,3);
+            merge(last1,last2);
             break;
 
         }
@@ -83,8 +75,7 @@ int main(){
             cout<<"Exiting . . . . \n";
             break;
 
-        }
-        
+        } 
         
         default:
         {
@@ -184,8 +175,8 @@ Node* merge(Node *last1, Node *last2){
     Node *p = singlyFirstFirst;
     Node *q = singlySecondFirst;
     Node *current = singlySecondFirst;
-
-    while(q->next != NULL && p->next!= NULL){
+    
+    while(q->next!= NULL && p->next!= NULL){
 
         if(p->next!=NULL){
             main = p;
@@ -195,6 +186,7 @@ Node* merge(Node *last1, Node *last2){
             main->next = q;
             q = q->next;
         }
+        main = q;
         
     }
     q->next = singlyFirstFirst;
