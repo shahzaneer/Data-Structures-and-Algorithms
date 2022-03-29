@@ -13,7 +13,7 @@ Node *MergeLast = NULL;
 // Functions prototype
 Node* insertNode(Node *last, int list);
 void display(Node *last , int list);
-Node* merge(Node* last1 ,Node *last2);
+void merge(Node* last1 ,Node *last2);
 Node* sortInDescendingOrder(Node* last);
 
 int main(){
@@ -24,8 +24,7 @@ int main(){
             <<"2 - Insert Element in Second list \n"
             <<"3 - Display list 1\n"
             <<"4 - Display list 2\n"
-            <<"5 - Merge \n"
-            <<"6 - Display Merged list \n"
+            <<"5 - Merged-List \n"
             <<"0 - Exit \n";
 
         cin>>option;
@@ -131,9 +130,7 @@ void display(Node *last , int list){
     else if(list == 2){
         last = last2;
     }
-    else if(list == 3){
-        last = MergeLast;      
-    }
+
     Node *p = last->next;
         do{
             cout<<p->data<<endl;
@@ -141,24 +138,22 @@ void display(Node *last , int list){
         }while(p!=last->next);   
 }
 
-Node* merge(Node *last1, Node *last2){
-    // ager dono lists khali hon
+void merge(Node *last1, Node *last2){
     if(last1 == NULL && last2 == NULL){
-        return MergeLast;
+        cout<<"Both lists are Empty"<<endl;
     }
     // ager list 1 khali ho
     if(last1 == NULL && last2!=NULL){
         last2 = sortInDescendingOrder(last2);
         MergeLast = last2;
-        MergeLast->next = last2->next;
-        return MergeLast;
+        display(MergeLast,2);
+        
     }
     // ager list 2 khali ho
     if(last2 == NULL && last1!=NULL){
         last1 = sortInDescendingOrder(last1);
         MergeLast = last1;
-        MergeLast->next = last1->next;
-        return MergeLast;
+        display(MergeLast,1);
     }
     // ager dono lists non NULL hon.
     // sbse pehle dono ko sort krlena hai!
@@ -174,25 +169,18 @@ Node* merge(Node *last1, Node *last2){
     Node *main  = NULL;
     Node *p = singlyFirstFirst;
     Node *q = singlySecondFirst;
-    Node *current = singlySecondFirst;
-    
-    while(q->next!= NULL && p->next!= NULL){
-
-        if(p->next!=NULL){
-            main = p;
+    while(p!=NULL && q!=NULL){
+        if(p!=NULL){
+            cout<<p->data<<endl;
             p = p->next;
         }
-        if(q->next!=NULL){
-            main->next = q;
+        if(q!=NULL){
+            cout<<q->data<<endl;
             q = q->next;
         }
-        main = q;
-        
-    }
-    q->next = singlyFirstFirst;
-    return q;
 
-    
+    }
+
 
 }
 
