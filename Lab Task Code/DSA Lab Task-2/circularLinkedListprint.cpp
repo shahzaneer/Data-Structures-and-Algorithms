@@ -164,12 +164,11 @@ void merge(Node *last1, Node *last2){
     Node *singlyFirstFirst = last1->next;
     Node *singlySecondFirst = last2->next;
     last1->next = NULL;
-    last2->next - NULL;
+    last2->next = NULL;
 
-    Node *main  = NULL;
     Node *p = singlyFirstFirst;
     Node *q = singlySecondFirst;
-    while(p!=NULL && q!=NULL){
+    while(p!=NULL || q!=NULL){
         if(p!=NULL){
             cout<<p->data<<endl;
             p = p->next;
@@ -185,24 +184,29 @@ void merge(Node *last1, Node *last2){
 }
 
 Node* sortInDescendingOrder(Node* last){
-    // implemented selection sort !
-    Node *p = last->next; //1st element 
-    Node *q = last->next->next; //2nd element
+    
+    Node *p = last->next; 
+    Node *q = last->next; 
+    Node *k = last->next;
     do{
-        while(q!=last->next){
-            if(p->data < q->data){
-                // swap only data not the nodes 💫
+        do{
+            if(p->data > q->data){
+                // swapping data!
                 int temp;
                 temp = p->data;
                 p->data = q->data;
                 q->data = temp;
             }
-            q = q->next;
-        }
+            else{
+                q = q->next;
+            }
+        }while(q!=k);
+        q = last->next;
         p = p->next;
 
-    }while(p->next!=last->next);
+    }while(p!=last->next);
 
     return last;
     
 }
+

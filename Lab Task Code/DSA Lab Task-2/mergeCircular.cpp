@@ -15,6 +15,7 @@ Node* insertNode(Node *last, int list);
 void display(Node *last , int list);
 Node* merge(Node* last1 ,Node *last2);
 Node* sortInDescendingOrder(Node* last);
+Node* NodeToBeInserted();
 
 int main(){
     int option;
@@ -171,38 +172,21 @@ Node* merge(Node *last1, Node *last2){
     }
     // ager dono lists non NULL hon.
     // sbse pehle dono ko sort krlena hai!
-    last1 = sortInDescendingOrder(last1);
-    last2 = sortInDescendingOrder(last2);
-
-    // circular se singly banaya hai 
-    Node *singlyFirstFirst = last1->next;
-    Node *singlySecondFirst = last2->next;
-    last1->next = NULL;
-    last2->next - NULL;
-
-    Node *main  = NULL;
-    Node *p = singlyFirstFirst;
-    Node *q = singlySecondFirst;
-    Node *current = singlySecondFirst;
-
-    while(q!= NULL && p!= NULL){
-
-        if(p!=NULL){
-            main = p;
-            p = p->next;
-        }
-        if(q!=NULL){
-            main->next = q;
-            q = q->next;
-        }
-        main = main->next;
-    }
-    // again Making circular
-    q->next = singlyFirstFirst;
-    return q;
-
     
-
+    last1 = sortInDescendingOrder(last1);  
+    Node* ptr;
+    Node* p = last1->next;
+    Node* q =p->next;
+    while(p!=last1){
+        ptr= NodeToBeInserted();
+        ptr->next=q;
+        p->next=ptr;
+        p=ptr;
+        q=q->next;
+        p=p->next;
+        
+}
+    
 }
 
 Node* sortInDescendingOrder(Node* last){
@@ -212,7 +196,7 @@ Node* sortInDescendingOrder(Node* last){
     Node *k = last->next;
     do{
         do{
-            if(p->data>q->data){
+            if(p->data<q->data){
                 int temp;
                 temp = p->data;
                 p->data = q->data;
@@ -231,3 +215,9 @@ Node* sortInDescendingOrder(Node* last){
     
 }
 
+Node* NodeToBeInserted(){
+    last2 = sortInDescendingOrder(last2);
+    Node *p = last2->next;
+    last2 = last2->next;
+    return p;
+}
