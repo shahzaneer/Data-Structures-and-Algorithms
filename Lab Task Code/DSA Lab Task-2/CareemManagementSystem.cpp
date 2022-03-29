@@ -40,9 +40,13 @@ Car* addNewCar(Car *first){
         newCar->next = NULL;
         return first;
     }
+    Car *p = first;
+    while(p->next!=NULL){
+        p = p->next;
+    }
 
-    newCar->carID = first->carID+1;
-    first->next = newCar;
+    newCar->carID = p->carID+1;
+    p->next = newCar;
     newCar->next = NULL;
     return first;
 
@@ -96,7 +100,11 @@ void addNewRide(Car *first){
     cout<<"Enter the Car-ID where you do want to add the ride: "<<endl;
     cin>>id;
     Car *p = first;
-    while((p->carID!=id) && (p!=NULL)){
+    
+    while(p!=NULL){
+        if(p->carID==id){
+            break;
+        }
         p = p->next;
     }
     if(p == NULL) {
@@ -133,7 +141,11 @@ void displayRides(Car *first){
     cout<<"Enter the Car-ID whose rides you want to see : "<<endl;
     cin>>id;
     Car *p = first;
-    while(p->carID!=id && p!=NULL){
+    
+    while(p!=NULL){
+        if(p->carID==id){
+            break;
+        }
         p = p->next;
     }
     if(p == NULL) {
@@ -164,7 +176,10 @@ void totalEarningOfCar( Car *first){
     cout<<"Enter the Car-ID whose total Earnings you do want to calculate: "<<endl;
     cin>>id;
     Car *p = first;
-    while(p->carID!=id && p!=NULL){
+    while(p!=NULL){
+        if(p->carID==id){
+            break;
+        }
         p = p->next;
     }
     if(p == NULL){
@@ -191,7 +206,12 @@ void totalEarningOfCar( Car *first){
 }
 
 void totalEarningOfAllCars( Car *first){
+    if(first == NULL){
+        cout<<"There is no Car in the Record \n"<<endl;
+        return;
+    }
     int earnings = 0;
+    
     Car *p = first;
     while(p!=NULL){
         Ride *r = p->first_ride;
