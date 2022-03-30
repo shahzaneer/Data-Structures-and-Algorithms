@@ -79,6 +79,7 @@ void displayType_2_Cars(Car *first){
         cout<<"There is no Registered Car !"<<endl;
         return;
     }
+    int count = 0;
     Car *p = first;
     cout<<"The Type 2 Cars are :"<<endl;
     while(p!=NULL){
@@ -89,9 +90,12 @@ void displayType_2_Cars(Car *first){
         cout<<"The Car Driver is "<<p->driver_name<<endl;
         cout<<"The Car Registration No is"<<p->reg_no<<endl;
         cout<<"--------------------------------"<<endl;
+        count++;
         p = p->next; 
         }
     }
+
+    if(count == 0) cout<<"NO type 2 car found !"<<endl;
     
 }
 

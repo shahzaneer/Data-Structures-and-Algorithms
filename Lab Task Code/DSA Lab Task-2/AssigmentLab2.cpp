@@ -120,16 +120,21 @@ bool isPalindrome(Node *head){
 void printInOrder(Node *head){
     Node *p = head; 
     Node *m = Mid(head);
-    Node *q = Reverse(m); 
+    Node *q = Reverse(m->next); 
     
-    while(q!=NULL){
+    while(q!=NULL || p!=NULL){
+        
+        if(p!=NULL){
 
-        cout<<p->data<<endl;
-        p = p->next;
-        if(p->data!=q->data) //this if is jugaar :(
-        cout<<q->data<<endl;
-        q = q->next;
-    
+            cout<<p->data<<endl;
+            p = p->next;
+        }
+        if(q!=NULL){
+
+            cout<<q->data<<endl;
+            q = q->next;
+        }
+        
     }
         
 }
@@ -172,7 +177,7 @@ int main()
     head = insertAtLast(head,7);
     head = insertAtLast(head,8);
     head = insertAtLast(head,9);
-
+printInOrder(head);
     Traversal(head);
 
     return 0;

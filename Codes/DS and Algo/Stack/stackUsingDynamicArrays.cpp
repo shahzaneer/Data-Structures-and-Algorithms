@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+
 struct stack{
     int size;
     int top = -1; //jb aik new stack initialize kia jayega tou stack main kuch nhi hoga!

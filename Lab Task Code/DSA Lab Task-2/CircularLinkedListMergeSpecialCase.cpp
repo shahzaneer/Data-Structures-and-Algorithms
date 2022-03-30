@@ -178,14 +178,14 @@ Node* merge(Node *last1, Node *last2){
     Node *singlyFirstFirst = last1->next;
     Node *singlySecondFirst = last2->next;
     last1->next = NULL;
-    last2->next - NULL;
+    last2->next = NULL;
 
     Node *main  = NULL;
     Node *p = singlyFirstFirst;
     Node *q = singlySecondFirst;
     Node *current = singlySecondFirst;
 
-    while(q!= NULL && p!= NULL){
+    while(q!= NULL || p!= NULL){
 
         if(p!=NULL){
             main = p;
