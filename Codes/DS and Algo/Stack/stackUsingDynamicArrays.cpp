@@ -6,6 +6,8 @@ struct stack{
     int size;
     int top = -1; //jb aik new stack initialize kia jayega tou stack main kuch nhi hoga!
     int *arr; //dynamic Array use krengay implement krne k liay tou yeh uske liay hai.
+    // yeh base address hoga hmari array ka... 
+
 };
 
 int isEmpty(stack *s){
@@ -47,6 +49,7 @@ void push(stack *s , int value){
 void pop(stack *s){
     if(isEmpty(s) == 1){
         cout<<"The stack is already Empty"<<endl;
+        return;
     }
     // delete (s->arr[s->top]); 
     //! delete krne se memory delete hoti hai hmne yeh nhi krna!
