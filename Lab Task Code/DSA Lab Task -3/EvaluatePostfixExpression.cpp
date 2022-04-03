@@ -60,7 +60,42 @@ char peek(stack *s){
     return peekElement;
 }
 
+int isOperator(char c){
+    if(c=='+' || c == '-' || c=='/' || c=='*'){
+        return 1;
+    }
+    return 0;
+}
+int operation(int a, int b,char oper){
+    
+    if(oper == '+') return b+a;
+    if(oper == '-') return b-a;
+    if(oper == '/') return b/a;
+    if(oper == '*') return b*a;
+    return -1;
+}
+int evaluationPostfix(stack *s , string postfix){
+    int result = 0;
+    for(int i=0;i<postfix.length();i++){
+        if(!isOperator(postfix[i])){
+            push(s,postfix[i]);
+        }
 
+        else{
+            char oper = postfix[i];
+            int a = pop(s)-'0'; //by deleting ascii value of 0 from any character we get int of that character!
+            int b = pop(s)-'0';
+            
+            //* neechay wala nhi chal rha!
+            // int a = (int) pop(s);
+            // int b = (int) pop(s); 
+            result = operation(a,b,oper);
+            push(s,result);
+        }
+    }
+
+    return peek(s);
+}
 
 
 int main(){
@@ -71,6 +106,7 @@ int main(){
     cout<<"Enter you Expression \n";
     string expression;
     cin>>expression;
+    cout<<"The answer of expression is "<<evaluationPostfix(s,expression)<<endl;
     
     return 0;
 }
