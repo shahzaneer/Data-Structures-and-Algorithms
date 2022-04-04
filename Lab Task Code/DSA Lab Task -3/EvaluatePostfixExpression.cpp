@@ -86,7 +86,7 @@ int evaluationPostfix(stack *s , string postfix){
             int a = pop(s)-'0'; //by deleting ascii value of 0 from any character we get int of that character!
             int b = pop(s)-'0';
             
-            //* neechay wala nhi chal rha!
+            //* neechay wala nhi chal rha! don't know why!
             // int a = (int) pop(s);
             // int b = (int) pop(s); 
             result = operation(a,b,oper);
