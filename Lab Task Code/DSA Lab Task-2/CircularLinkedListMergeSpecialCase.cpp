@@ -13,8 +13,9 @@ Node *MergeLast = NULL;
 // Functions prototype
 Node* insertNode(Node *last, int list);
 void display(Node *last , int list);
-Node* merge(Node* last1 ,Node *last2);
+Node* merge();
 Node* sortInDescendingOrder(Node* last);
+Node* getNode();
 
 int main(){
     int option;
@@ -65,7 +66,7 @@ int main(){
 
         case 5:
         {
-            MergeLast =  merge(last1,last2);
+            MergeLast =  merge();
             break;
 
         }
@@ -133,6 +134,13 @@ Node* insertNode(Node *last,int list){
     
 }
 
+Node* getNode(){
+    Node *p = last2->next;
+    last2->next = p->next;
+    p->next = NULL;
+    return p;
+}
+
 void display(Node *last , int list){
     if(list == 1){
         last = last1;
@@ -150,7 +158,7 @@ void display(Node *last , int list){
         }while(p!=last->next);   
 }
 
-Node* merge(Node *last1, Node *last2){
+Node* merge(){
     // ager dono lists khali hon
     if(last1 == NULL && last2 == NULL){
         return MergeLast;
@@ -174,33 +182,21 @@ Node* merge(Node *last1, Node *last2){
     last1 = sortInDescendingOrder(last1);
     last2 = sortInDescendingOrder(last2);
 
-    // circular se singly banaya hai 
-    Node *singlyFirstFirst = last1->next;
-    Node *singlySecondFirst = last2->next;
-    last1->next = NULL;
-    last2->next = NULL;
+    Node *nodeOfSecondList = NULL;
+    Node *p = last1->next;
+    Node *q = p->next;
+    do{
+        nodeOfSecondList = getNode();
+        p->next = nodeOfSecondList;
+        nodeOfSecondList->next = q;
+        // p ko aagay lejao
+        p = nodeOfSecondList;
+        p = p->next;
+        q = q->next;
 
-    Node *main  = NULL;
-    Node *p = singlyFirstFirst;
-    Node *q = singlySecondFirst;
-    Node *current = singlySecondFirst;
-
-    while(q!= NULL || p!= NULL){
-
-        if(p!=NULL){
-            main = p;
-            p = p->next;
-        }
-        if(q!=NULL){
-            main->next = q;
-            q = q->next;
-        }
-        main = main->next;
-    }
-    // again Making circular
-    q->next = singlyFirstFirst;
-    return q;
-
+    }while(p!=last1);
+    MergeLast = last1;
+    return MergeLast;
     
 
 }

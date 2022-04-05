@@ -3,12 +3,14 @@ using namespace std;
 
 struct Queue{
     int size;
-    int f = -1;
-    int r = -1;
+    int f = -1; // for dequeue 
+    int r = -1; // for enqueue
     int *arr;
 };
 
-Queue *q = NULL;
+Queue *q = NULL; //Global Scenezz
+
+// ! The best function written is a function with zero Arguments!
 
 int isFull(){
     if(q->r == q->size-1){
@@ -74,7 +76,7 @@ int main(){
             <<"2 - DeQueue\n"
             <<"3 - Display\n"
             <<"-1 - Exit\n";
-            
+
         cin>>option;
         switch (option)
         {
