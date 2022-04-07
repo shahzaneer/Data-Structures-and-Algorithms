@@ -28,6 +28,15 @@ int isEmpty(){
     return 0;
 }
 
+void priorityQueueEnqueue(int value){
+    if(isFull() == 1){
+        cout<<" full \n";
+        return;
+    }
+
+
+}
+
 void enqueue(int value){
     if(isFull()){
         cout<<"Enqueue is not possible\n";

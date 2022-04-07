@@ -3,6 +3,22 @@
         {
             "name": "Win32",
             "includePath": [
+                "${workspaceFolder}/**",
+                "C:/msys64/mingw64/include/openssl"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        },
+        {
+            "name": "stack.h",
+            "includePath": [
                 "${workspaceFolder}/**"
             ],
             "defines": [

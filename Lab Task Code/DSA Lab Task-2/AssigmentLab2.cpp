@@ -52,11 +52,12 @@ Node* insertAtLast(Node *head , int value){
 
 //* LinkedList in Reverse Order (iterative)
 Node* Reverse(Node *head){
+    
     Node *previous,*current,*newNext;
     previous = NULL;
     current = head;
 
-    while(current!=NULL){
+while(current!=NULL){
         // yeh hai connecting
         newNext = current->next;
         current->next = previous;
@@ -72,17 +73,25 @@ Node* Reverse(Node *head){
 
 
 //* LinkedList in Reverse Order (recursive)
-Node* recursiveReverse(Node *head){
-    if(head == NULL || head->next == NULL){
-        return head;
+void ReversePrint(Node *head){
+    if(head == NULL){
+        return;
     }
-
-    Node *newHead = recursiveReverse(head->next);
-    head->next->next = head;
-    head->next = NULL;
-    return newHead;
-
+    ReversePrint(head->next);
+    cout<<head->data<<endl;
 }
+// Recursive Method to change the links . . . 
+// Node* recursiveReverse(Node *head){
+//     if(head == NULL || head->next == NULL){
+//         return head;
+//     }
+
+//     Node *newHead = recursiveReverse(head->next);
+//     head->next->next = head;
+//     head->next = NULL;
+//     return newHead;
+
+// }
 
 //* Palindrome Checking
 Node* Mid(Node *head){
@@ -120,23 +129,16 @@ bool isPalindrome(Node *head){
 void printInOrder(Node *head){
     Node *p = head; 
     Node *m = Mid(head);
-    Node *q = Reverse(m->next); 
+    Node *q = Reverse(m);
+
+    while(q!=NULL){
+        cout<<p->data<<endl;
+        p = p->next;
+        cout<<q->data<<endl;
+        q = q->next;
+    } 
     
-    while(q!=NULL || p!=NULL){
-        
-        if(p!=NULL){
-
-            cout<<p->data<<endl;
-            p = p->next;
-        }
-        if(q!=NULL){
-
-            cout<<q->data<<endl;
-            q = q->next;
-        }
-        
-    }
-        
+            
 }
 
 
@@ -170,15 +172,17 @@ int main()
     Node *head = NULL;
     head = insertAtLast(head,1);
     head = insertAtLast(head,2);
-    head = insertAtLast(head,3);
-    head = insertAtLast(head,4);
-    head = insertAtLast(head,5);
-    head = insertAtLast(head,6);
-    head = insertAtLast(head,7);
-    head = insertAtLast(head,8);
-    head = insertAtLast(head,9);
-printInOrder(head);
-    Traversal(head);
+    head = insertAtLast(head,2);
+    head = insertAtLast(head,1);
+    // head = insertAtLast(head,5);
+    // head = insertAtLast(head,6);
+    // head = insertAtLast(head,7);
+    // head = insertAtLast(head,8);
+    // head = insertAtLast(head,9);
+// printInOrder(head);
+cout<<isPalindrome(head);
+    // Traversal(head);
+    // ReversePrint(head);
 
     return 0;
 }
