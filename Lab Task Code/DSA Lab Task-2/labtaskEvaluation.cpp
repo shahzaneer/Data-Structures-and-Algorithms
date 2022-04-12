@@ -160,13 +160,44 @@ void printInSpecificOrder(Node *head)
     // }
 }
 
+int isPalindrome(Node *head)
+{
+    Node *s = head;
+    Node *p = head;
+    Node *q = head;
+    Node *ptr = NULL;
+    while (q->next != NULL)
+    {
+        q = q->next;
+    }
+
+    ptr = q;
+    do
+    {
+        // cout << ptr->data << endl;
+        if (s->data != ptr->data)
+        {
+            return 0;
+        }
+        s = s->next;
+        ptr = head;
+        while (ptr->next != q)
+        {
+            ptr = ptr->next;
+        }
+        q = ptr;
+    } while (ptr != p);
+
+    return 1;
+    // cout << p->data << endl;
+}
 int main()
 {
     Node *head = NULL;
     head = insertAtLast(head, 1);
     head = insertAtLast(head, 2);
-    head = insertAtLast(head, 3);
-    head = insertAtLast(head, 4);
+    // head = insertAtLast(head, 2);
+    head = insertAtLast(head, 1);
     // head = insertAtLast(head,5);
     // head = insertAtLast(head,6);
     // head = insertAtLast(head,7);
@@ -176,9 +207,10 @@ int main()
     // Traversal(head);
     // ReversePrint(head);
 
-    reversePrintIteration(head);
+    // reversePrintIteration(head);
     // printInSpecificOrder(head);
-    Traversal(head);
+    // Traversal(head);
+    cout << isPalindrome(head);
 
     return 0;
 }
