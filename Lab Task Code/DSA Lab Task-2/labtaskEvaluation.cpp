@@ -174,7 +174,6 @@ int isPalindrome(Node *head)
     ptr = q;
     do
     {
-        // cout << ptr->data << endl;
         if (s->data != ptr->data)
         {
             return 0;
@@ -189,14 +188,14 @@ int isPalindrome(Node *head)
     } while (ptr != p);
 
     return 1;
-    // cout << p->data << endl;
 }
 int main()
 {
     Node *head = NULL;
     head = insertAtLast(head, 1);
-    head = insertAtLast(head, 2);
-    // head = insertAtLast(head, 2);
+    head = insertAtLast(head, 45);
+    head = insertAtLast(head, 45);
+    // head = insertAtLast(head, 45);
     head = insertAtLast(head, 1);
     // head = insertAtLast(head,5);
     // head = insertAtLast(head,6);
