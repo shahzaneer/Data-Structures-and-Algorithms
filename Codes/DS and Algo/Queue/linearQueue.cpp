@@ -149,10 +149,12 @@ int main()
         case 4:
         {
             front();
+            break;
         }
         case 5:
         {
             rear();
+            break;
         }
         case -1:
         {
