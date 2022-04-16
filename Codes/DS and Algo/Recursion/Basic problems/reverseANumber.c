@@ -24,7 +24,7 @@ bool isPalindrome(int number){
 int main(){
     // reverse(1234);
     // printf("%d",isPalindrome(1221));
-    printf("%d",isPalindrome(12445));
+    printf("%d",isPalindrome(177771));
 
     // printf("%d",sum);
     return 0;
