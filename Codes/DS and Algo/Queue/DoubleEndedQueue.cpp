@@ -1,136 +1,169 @@
 #include <iostream>
 using namespace std;
 
-struct LinearQueue
+// DEqueue
+struct DEQueue
 {
-    int size;
-    int front = -1;
     int rear = -1;
+    int front = -1;
+    int size;
     int *arr;
 };
 
-LinearQueue *q = NULL;
+DEQueue *q = NULL; // making of a global pointer
 
-// isEmpty
-int isEmpty()
-{
-    if (q->front == -1 && q->rear == -1)
-    {
-        return 1;
-    }
-    return 0;
-}
-// isFull
 int isFull()
 {
-    if (q->rear == q->size - 1)
+    if (((q->rear + 1) % q->size) == q->front)
     {
         return 1;
     }
     return 0;
 }
 
-// Insertion from rear
+int isEmpty()
+{
+    if (q->rear == -1 && q->front == -1)
+    {
+        return 1;
+    }
+    return 0;
+}
+
 void enqueueFromRear(int value)
 {
     if (isFull() == 1)
     {
-        cout << "The Queue is Full!" << endl;
+        cout << "Queue is Full!" << endl;
+        return;
+    }
+
+    else if (isEmpty() == 1)
+    {
+        q->rear = q->front = 0;
+        q->arr[q->rear] = value;
+    }
+
+    else
+    {
+        q->rear = (q->rear + 1) % q->size;
+        q->arr[q->rear] = value;
+    }
+}
+
+void dequeueFromFront()
+{
+    if (isEmpty() == 1)
+    {
+        cout << "The Queue is already empty!" << endl;
+        return;
+    }
+
+    else if (q->rear == q->front)
+    {
+        cout << "The Dequeued Element is " << q->arr[q->front] << endl;
+        q->rear = q->front = -1;
+    }
+    else
+    {
+        cout << "The Dequeued Element is " << q->arr[q->front] << endl;
+        // now circular increment in the front index!
+        q->front = (q->front + 1) % q->size;
+    }
+}
+
+void enqueueFromFront(int value)
+{
+    if (isFull() == 1)
+    {
+        cout << "The Queue is full!" << endl;
         return;
     }
     else if (isEmpty() == 1)
     {
         q->front = q->rear = 0;
-        q->arr[q->rear] = value;
+        q->arr[q->front] = value;
+    }
+    else if (q->front == 0)
+    {
+        q->front = q->size - 1;
+        q->arr[q->front] = value;
     }
 
     else
     {
-        q->rear++;
-        q->arr[q->rear] = value;
+        q->front--;
+        q->arr[q->front] = value;
     }
 }
 
-// deletion from front
-void dequeueFromFront()
+void dequeueFromRear()
 {
     if (isEmpty() == 1)
     {
-        cout << "The queue is Already Empty!" << endl;
+        cout << "The queue is already Empty " << endl;
         return;
     }
     else if (q->front == q->rear)
     {
-        cout << "The Dequeued Value is " << q->arr[q->front] << endl;
+        cout << "The Dequeued Element is " << q->arr[q->rear] << endl;
         q->front = q->rear = -1;
     }
-    else
+    else if (q->rear == 0)
     {
-        cout << "The Dequeued Value is " << q->arr[q->front] << endl;
-        q->front++;
-    }
-}
-
-// insertion from front
-void enqueueFromFront(int value)
-{
-    if (isFull() == 1)
-    {
-        cout << "The queue is full!" << endl;
-        return;
-    }
-    else if (isEmpty() == 1)
-    {
-        q->rear = q->front = 0;
-        q->arr[q->front] = value;
+        cout << "The Dequeued Element is " << q->arr[q->rear] << endl;
+        q->rear = q->size - 1;
     }
     else
     {
-        
+        cout << "The Dequeued Element is " << q->arr[q->rear] << endl;
+        q->rear--;
     }
 }
-
-// deletion from rear
-void dequeueFromRear() {}
-
-// front element without deleting
-void front()
-{
-    if (isEmpty() == 1)
-    {
-        cout << "The Queue is Empty!" << endl;
-        return;
-    }
-    cout << "The Element at Front is " << q->arr[q->front] << endl;
-}
-// rear element without deleting
-void rear()
-{
-    if (isEmpty() == 1)
-    {
-        cout << "The Queue is Empty!" << endl;
-        return;
-    }
-    cout << "The Element at rear is " << q->arr[q->rear] << endl;
-}
-// display
 void display()
 {
     if (isEmpty() == 1)
     {
-        cout << "The queue is empty!" << endl;
+        cout << "The Queue is Empty " << endl;
+        return;
+    }
+    //  in case of printing
+    int i = q->front;
+    while (i != q->rear)
+    {
+        cout << q->arr[i] << endl;
+        i = (i + 1) % q->size;
+    }
+    cout << q->arr[q->rear] << endl;
+}
+
+void front()
+{
+    if (isEmpty() == 1)
+    {
+        cout << "The Queue is Already Empty " << endl;
         return;
     }
 
-    for (int i = q->front; i <= q->rear; i++)
+    // front element
+    cout << "The front Element is " << q->arr[q->front] << endl;
+}
+
+void rear()
+{
+    if (isEmpty() == 1)
     {
-        cout << q->arr[i] << endl;
+        cout << "The Queue is Already Empty " << endl;
+        return;
     }
+
+    // rear element
+    cout << "The rear Element is " << q->arr[q->rear] << endl;
 }
 
 int main()
 {
-    q = new LinearQueue; // DMA things
+    q = new DEQueue; // DMA things
     int size;
     cout << "Enter the size of queue\n";
     cin >> size;
@@ -140,13 +173,17 @@ int main()
 
     do
     {
+        cout << "--------------------------------------------------\n";
         cout << "Enter options to perform corresponding actions \n";
-        cout << "1 - Enqueue\n"
-             << "2 - DeQueue\n"
-             << "3 - Display\n"
-             << "-1 - Exit\n"
-             << "4 - front\n"
-             << "5- rear \n";
+        cout << "1 - EnqueueFromRear\n"
+             << "2 - DeQueueFromFront\n"
+             << "3 - EnqueueFromFront\n"
+             << "4 - DequeueFromRear\n"
+             << "5 - Display\n"
+             << "6 - front\n"
+             << "7- rear \n"
+             << "-1 - Exit\n";
+        cout << "--------------------------------------------------\n";
 
         cin >> option;
         switch (option)
@@ -156,27 +193,40 @@ int main()
             int val;
             cout << "Enter value \n";
             cin >> val;
-            enqueue(val);
+            enqueueFromRear(val);
             break;
         }
 
         case 2:
         {
-            dequeue();
+            dequeueFromFront();
             break;
         }
 
         case 3:
         {
-            display();
+            int val;
+            cout << "Enter value \n";
+            cin >> val;
+            enqueueFromFront(val);
             break;
         }
         case 4:
         {
-            front();
+            dequeueFromRear();
             break;
         }
         case 5:
+        {
+            display();
+            break;
+        }
+        case 6:
+        {
+            front();
+            break;
+        }
+        case 7:
         {
             rear();
             break;
