@@ -70,23 +70,7 @@ char peek(stack *s)
     char peekElement = s->arr[s->top];
     return peekElement;
 }
-int singleBracesMatching(stack *s, string expression)
-{
-    for (int i = 0; i < expression.length(); i++)
-    {
-        if (expression[i] == '(')
-        {
-            push(s, expression[i]);
-        }
-        if (expression[i] == ')' && isEmpty(s) != 1)
-        {
-            pop(s);
-        }
-    }
-    if (isEmpty(s))
-        return 1;
-    return 0;
-}
+
 int isMatched(char toBeEvaluated, char poppedValue)
 {
     if (toBeEvaluated == '}' && poppedValue == '{')
@@ -98,13 +82,37 @@ int isMatched(char toBeEvaluated, char poppedValue)
 
     return 0;
 }
+
+int checkPrecedence(char toBeEvaluated ){
+    if(toBeEvaluated == '['){
+        return 3;
+    }
+    else if (toBeEvaluated == '{'){
+        return 2;
+    }
+    else if (toBeEvaluated == '('){
+        return 1;
+    }
+
+    return 0;
+}
+
+
 int multipleBracesMatching(stack *s, string expression)
 {
     for (int i = 0; i < expression.length(); i++)
     {
         if (expression[i] == '[' || expression[i] == '{' || expression[i] == '(')
         {
-            push(s, expression[i]);
+            if(isEmpty(s) || checkPrecedence(expression[i]) < checkPrecedence(peek(s))){
+                push(s, expression[i]);
+            }
+            else if( !isEmpty(s) &&  checkPrecedence(expression[i] > checkPrecedence(peek(s)))){
+                // Ager pehle jo para hai wo kam preceence ka hai aur ab jo aarha hai zyada precedence ka hai 
+                // tou push krne ki bajaye yahan se hi unbalanced declarted krdo.
+                return 0;
+            }
+            
         }
 
         if (expression[i] == ']' || expression[i] == '}' || expression[i] == ')')
