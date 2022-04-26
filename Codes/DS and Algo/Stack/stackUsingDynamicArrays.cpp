@@ -39,6 +39,7 @@ int isFull(stack *s){
 void push(stack *s , int value){
     if(isFull(s) == 1){
         cout<<"The Stack is already filled"<<endl;
+        return;
     }
     else{
     s->top++;
@@ -76,7 +77,7 @@ int peek(stack *s){
     //  the value of the top most element of the 
     // stack without deleting that element from the stack.
 
-    if(s->top<0){
+    if(isEmpty(s) == 1){
         return -1;
     }
     else{
