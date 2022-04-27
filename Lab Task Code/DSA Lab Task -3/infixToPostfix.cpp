@@ -83,16 +83,25 @@ int isOperator(char c)
     return 0;
 }
 
+int isLiteral(char c)
+{
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
+    {
+        return 1;
+    }
+    return 0;
+}
+
 int precedence(char c)
 {
     if (c == '^')
         return 3;
     else if (c == '*' || c == '/')
-    
+
         return 2;
-    
+
     else if (c == '-' || c == '+')
-    
+
         return 1;
 
     else
@@ -107,7 +116,7 @@ void infixToPostfix(string expression, stack *s)
     {
         // Traversing the whole Expression one time !
 
-        if (!isOperator(expression[i]) == 1)
+        if (isLiteral(expression[i]) == 1)
         {
             // If you encounter operands simply add them to the postfix Statement!
             postfix += expression[i];
@@ -152,13 +161,10 @@ void infixToPostfix(string expression, stack *s)
                 {
                     postfix += peek(s);
                     pop(s);
-                
                 }
-                push(s, expression[i]); //jese hi precedence greater ho jaye push it to the stack
+                push(s, expression[i]); // jese hi precedence greater ho jaye push it to the stack
             }
         }
-
-        
     }
 
     // Now after the traversal, adding the operators present in the stack to the postfix Expression
@@ -171,7 +177,6 @@ void infixToPostfix(string expression, stack *s)
     // stack main mojud characters ko postfix main daalna hai!
 
     cout << postfix << endl;
-    
 }
 
 int main()
@@ -184,7 +189,6 @@ int main()
     string expression;
     cin >> expression;
     infixToPostfix(expression, s);
-    
 
     return 0;
 }
