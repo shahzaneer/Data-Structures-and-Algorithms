@@ -10,7 +10,7 @@ struct treeNode
 
 treeNode *root = NULL; // global pointer to root node
 
-treeNode *createTreeNode(int value)
+treeNode* createTreeNode(int value)
 {
     treeNode *p = new treeNode;
     p->data = value;
