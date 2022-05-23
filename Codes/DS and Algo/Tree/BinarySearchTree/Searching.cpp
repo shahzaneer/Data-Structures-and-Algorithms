@@ -22,8 +22,6 @@ void inorderTraversal(BSTNode *root)
     inorderTraversal(root->right);
 }
 
-// Create BST Node | Insertion in BST
-
 void insert(int value)
 {
     // creation of a new Node
@@ -34,7 +32,6 @@ void insert(int value)
 
     if (root == NULL)
     {
-        // root Node insertion
         root = newNode;
     }
     else
@@ -42,10 +39,8 @@ void insert(int value)
         BSTNode *p = root;
         BSTNode *temp = NULL;
 
-        // Searching for where should the element be inserted
         while (p != NULL)
         {
-
             if (p->data > value)
             {
                 temp = p;
@@ -58,11 +53,7 @@ void insert(int value)
             }
         }
 
-        // now p is containting that null where we have to insert our newNode
-        // so
         p = newNode;
-        // also Temp is containing the parent of p . now to decide where it should be inserted
-        // in left or right subtree again checking
         if (temp->data > p->data)
         {
             temp->left = p;
@@ -74,6 +65,59 @@ void insert(int value)
     }
 }
 
+int findRecursive(BSTNode *root, int key)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    if (root->data == key)
+    {
+        return 1;
+    }
+    if (root->data > key)
+    {
+        return findRecursive(root->left, key);
+    }
+    else if (root->data < key)
+    {
+        return findRecursive(root->right, key);
+    }
+
+    return 1;
+}
+
+int findIterative(int key)
+{
+    BSTNode *tempRoot = root;
+    while (tempRoot != NULL)
+    {
+        if (key > tempRoot->data)
+        {
+            // cout << "Pakistan noor hai " << endl;
+            tempRoot = tempRoot->right;
+        }
+        else if (key < tempRoot->data)
+        {
+            // cout << "Pakistan noor hai " << endl;
+            tempRoot = tempRoot->left;
+        }
+
+//* Efficient way is write low number of lines with maximum readability
+        // else
+        //     return 1;
+
+        if (key == tempRoot->data)
+        {
+            // cout << "aur noor ko zawal nhi! - Wasif ali wasif " << endl;
+            return 1;
+        }
+
+    }
+    // cout << "nhi mil rha bhai  " << endl;
+    return 0;
+}
+
 int main()
 {
     insert(45);
@@ -81,7 +125,9 @@ int main()
     insert(12);
     insert(3);
     insert(1);
-    insert(67);
-    inorderTraversal(root);
+
+    // inorderTraversal(root) ;
+    cout << findIterative(1);
+    // cout << findRecursive(root, 45);
     return 0;
 }

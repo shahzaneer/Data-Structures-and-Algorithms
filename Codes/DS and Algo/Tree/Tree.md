@@ -7,7 +7,7 @@
 - Child -> Connected Node by Parent Node
 - Leaf -> Enternal Node
 - Internal Node -> Nodes with atleast one child
-- Depth of Node -> No of edges from root to that node.
+- Depth of Node -> No of edges from root to that node. (equal to the the levels of a Node)
 - Height of Node -> No of edges from node to the deepest possible leaf Node.
 - Ancestors -> `aaba || aabaao ijdaad`
 - Descendents -> `Aaal Aulaad`
