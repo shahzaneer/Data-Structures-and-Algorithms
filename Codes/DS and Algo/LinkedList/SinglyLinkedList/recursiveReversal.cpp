@@ -44,8 +44,7 @@ Node* recursiveReverse(Node *head){
 
 void Traversal(Node *head){
     Node *p = head;
-    while(p!=NULL
-    [){
+    while(p!=NULL){
         cout<<p->data<<endl;
         p = p->next;
     }   
