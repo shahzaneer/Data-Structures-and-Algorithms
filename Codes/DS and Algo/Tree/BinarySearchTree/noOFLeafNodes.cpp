@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+// MID EXAM DSA --> find the total number of leaves in a BST
 struct BSTNode
 {
     int data;
@@ -26,7 +26,6 @@ void inorderTraversal(BSTNode *root)
 
 void insert(int value)
 {
-    // creation of a new Node
     BSTNode *newNode = new BSTNode();
     newNode->data = value;
     newNode->right = NULL;
@@ -34,7 +33,6 @@ void insert(int value)
 
     if (root == NULL)
     {
-        // root Node insertion
         root = newNode;
     }
     else
@@ -42,7 +40,6 @@ void insert(int value)
         BSTNode *p = root;
         BSTNode *temp = NULL;
 
-        // Searching for where should the element be inserted
         while (p != NULL)
         {
 
@@ -56,19 +53,9 @@ void insert(int value)
                 temp = p;
                 p = p->right;
             }
-            else
-            {
-                cout << "Duplicate cannot be added " << endl;
-                ;
-                return;
-            }
         }
 
-        // now p is containting that null where we have to insert our newNode
-        // so
         p = newNode;
-        // also Temp is containing the parent of p . now to decide where it should be inserted
-        // in left or right subtree again checking
         if (temp->data > p->data)
         {
             temp->left = p;
@@ -80,6 +67,22 @@ void insert(int value)
     }
 }
 
+static int counter;
+int totalLeafNodes(BSTNode *root)
+{
+    if (!root)
+    // root == NULL 
+    {
+        return counter;
+    }
+    totalLeafNodes(root->left);
+
+    if (!root->left && !root->right)
+    {
+        counter++;
+    }
+    totalLeafNodes(root->right);
+}
 int main()
 {
     insert(45);
@@ -88,7 +91,7 @@ int main()
     insert(3);
     insert(1);
     insert(67);
-    insert(67);
     // inorderTraversal(root);
+    cout << totalLeafNodes(root) << endl;
     return 0;
 }

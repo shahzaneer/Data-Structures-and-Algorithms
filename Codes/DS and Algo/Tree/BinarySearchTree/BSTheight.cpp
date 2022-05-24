@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 struct BSTNode
 {
     int data;
@@ -22,11 +21,8 @@ void inorderTraversal(BSTNode *root)
     inorderTraversal(root->right);
 }
 
-// Create BST Node | Insertion in BST
-
 void insert(int value)
 {
-    // creation of a new Node
     BSTNode *newNode = new BSTNode();
     newNode->data = value;
     newNode->right = NULL;
@@ -34,7 +30,6 @@ void insert(int value)
 
     if (root == NULL)
     {
-        // root Node insertion
         root = newNode;
     }
     else
@@ -42,7 +37,6 @@ void insert(int value)
         BSTNode *p = root;
         BSTNode *temp = NULL;
 
-        // Searching for where should the element be inserted
         while (p != NULL)
         {
 
@@ -56,19 +50,9 @@ void insert(int value)
                 temp = p;
                 p = p->right;
             }
-            else
-            {
-                cout << "Duplicate cannot be added " << endl;
-                ;
-                return;
-            }
         }
 
-        // now p is containting that null where we have to insert our newNode
-        // so
         p = newNode;
-        // also Temp is containing the parent of p . now to decide where it should be inserted
-        // in left or right subtree again checking
         if (temp->data > p->data)
         {
             temp->left = p;
@@ -80,6 +64,14 @@ void insert(int value)
     }
 }
 
+int height(BSTNode *root)
+{
+    if (!root)
+    {
+        return 0;
+    }
+    return max(height(root->left), height(root->right)) + 1;
+}
 int main()
 {
     insert(45);
@@ -88,7 +80,8 @@ int main()
     insert(3);
     insert(1);
     insert(67);
-    insert(67);
     // inorderTraversal(root);
+    cout << height(root) << endl;
+
     return 0;
 }
