@@ -13,8 +13,18 @@
 
 # Implementation
 
-- Beacause of Complete and almost Complete Binary tree we can also use Array for implementing Heap Data Structure.
+- Because of Complete and almost Complete Binary tree we use Array for implementing Heap Data Structure.
 
 # Time Complexity
-- Insertion -->  `O(log n)`
-- Deletion  --> `O`
+
+- Insertion --> `O(log n)`
+- Deletion --> `O(log n)`
+
+```cpp
+// Important formulas for implementation
+
+int i = nodes;
+int parent = i/2;
+int leftChild =  i * 2 + 1;
+int rightChild = i * 2 + 2;
+```

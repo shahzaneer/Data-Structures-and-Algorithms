@@ -2,8 +2,6 @@
 #include <math.h>
 using namespace std;
 
-
-
 void heapify();
 
 int heap[100]; // heap array
@@ -12,7 +10,7 @@ static int n;  // number of elements in the heap
 void insert(int value)
 {
     // pehle add krdo then heapify krdo!
-    n++;             
+    n++;
     heap[n] = value;
     heapify();
 }
@@ -41,20 +39,38 @@ void swap(int i, int j)
 {
     // Simple swap logic here for swapping values of heap[child] and heap[parent]
     int temp = heap[i];
+    // cout << "Pakistan noor hai " << endl;
     heap[i] = heap[j];
     heap[j] = temp;
+    // cout << "Pakistan noor hai " << endl;
 }
 
-void deleteValue(int key){
-    for (int i = 1; i <= n;i++){
-        if(heap[i] == key ){
-            heap[i] = heap[n];
-            n--;
-            // heapify();
-            break;
+// Deletion in heap only takes  place form the root node
+// only root will be deleted and then we will heapify the rest of tree.
+void delete_root()
+{
+    int i = 1;         // root's index
+    heap[i] = heap[n]; // copying the last element to root
+    n--;               // decrementing the size of heap
+    // now we will heapify the rest of tree
+    // this heapification will be done in the reverse manner as of insertion
+    int leftChild, rightChild;
+    while (i <= n && (leftChild = 2 * i) <= n && (rightChild = 2 * i + 1) <= n)
+    {
+        leftChild = 2 * i;
+        rightChild = 2 * i + 1;
+        // larger will keep the index of greater child
+        int larger = heap[leftChild] > heap[rightChild] ? leftChild : rightChild;
+        if (heap[i] < heap[larger])
+        {
+            swap(heap[i], heap[larger]);
+            i = larger; // beacuse larger contains the childNode which was large and now this child node will be our parent node
         }
     }
 }
+
+// function to delete the heap root
+
 int main()
 {
 
@@ -66,7 +82,7 @@ int main()
 
     print();
 
-    deleteValue(765);
+    delete_root();
     print();
 
     return 0;
