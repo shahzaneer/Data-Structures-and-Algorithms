@@ -14,3 +14,7 @@
 # Implementation
 
 - Beacause of Complete and almost Complete Binary tree we can also use Array for implementing Heap Data Structure.
+
+# Time Complexity
+- Insertion -->  `O(log n)`
+- Deletion  --> `O`
