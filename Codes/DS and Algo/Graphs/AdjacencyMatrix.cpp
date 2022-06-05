@@ -2,6 +2,8 @@
 using namespace std;
 
 // Adjacency Matrix Representation
+// if the graph is dense graph then it is used mostly!
+
 
 struct Graph
 {
@@ -22,7 +24,6 @@ Graph *adjMatrixOFGraph()
         cout << "Memory was not given in the heap" << endl;
         return NULL;
     }
-
     // User input for Nodes and Edges
     cout << "Enter Nodes of Graph " << endl;
     cin >> G->V;
@@ -33,6 +34,7 @@ Graph *adjMatrixOFGraph()
     // The order of 2D matrix depends upon the vertices
 
     G->adj = (int **)malloc(sizeof(int) * (G->V * G->V)); // Dynamically Creating 2D array
+    // G->adj = new int [G->V][G->V];
 
     for (int u = 0; u < G->V; u++)
     {
