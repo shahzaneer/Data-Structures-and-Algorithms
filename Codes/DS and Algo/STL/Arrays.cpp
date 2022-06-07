@@ -28,7 +28,6 @@ int main(){
 
     array <int , 6> a2 = {11,22,33,44,55,66};
 
-    a1.swap(a2) // now a1 will be a2 and a2 will be a1
 
 
     return 0;
