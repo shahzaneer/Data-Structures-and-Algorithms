@@ -18,6 +18,7 @@ Graph *adjMatrixOFGraph()
 {
     int u, v, i;
     Graph *G = new Graph(); // Dynamically creating a graph
+    cout << "memory dedi hai " << endl;
     if (!G)
     {
         // if memory was not given
@@ -32,22 +33,28 @@ Graph *adjMatrixOFGraph()
 
     // Dynamically making a 2D Matrix for storing the path info
     // The order of 2D matrix depends upon the vertices
+    // G->adj = (int **)malloc(sizeof(int) * (G->V * G->V)); // Dynamically Creating 2D array
 
-    G->adj = (int **)malloc(sizeof(int) * (G->V * G->V)); // Dynamically Creating 2D array
-    // G->adj = new int [G->V][G->V];
+    G->adj = new int *[G->V]; // Dynamically Creating 2D array
 
-    for (int u = 0; u < G->V; u++)
+    for (int u = 1; u <= G->V; u++)
     {
-        for (int v = 0; v < G->V; v++)
+        G->adj[u] = new int[G->V];
+        
+        for (int v = 1; v <= G->V; v++)
         {
             // initially Zero will be allotted to the whole 2D Matrix
+            // cout << "Zero se pehle" << endl;
             G->adj[u][v] = 0;
+            // cout << "Declaring things to 0";
         }
     }
 
+    // cout << "sbmay zero dene k bad k manazir " << endl;
     int firstNode, secondNode;
 
-    for (int u = 0; u < G->V; u++)
+    for (int k = 0; k < G->V; k++)
+    // now for edges we will enter the first node and second node
     {
         cout << "Enter the Nodes in an ordered Pair which are directly connected " << endl;
         cout << "Enter first Node" << endl;
@@ -57,8 +64,9 @@ Graph *adjMatrixOFGraph()
 
         // now as we got the ordered pair which are connected so we will mark them one
         G->adj[firstNode][secondNode] = 1;
-        // As the graph is not directed so
+        // As the graph is not a directed Graph!
         G->adj[secondNode][firstNode] = 1;
+        
     }
 
     return G;
@@ -66,6 +74,8 @@ Graph *adjMatrixOFGraph()
 
 int main()
 {
+    Graph *G = adjMatrixOFGraph();
+    cout << "Pakistan noor hai aur noor ko zawal nhi " << endl;
 
     return 0;
 }
