@@ -19,7 +19,7 @@ int main(){
 
     vector <int> vertices_vector[vertices + 1]; //one 2D vector //we have increased one here because our vertices are from 1 to n
     //now setting the edges in the vector
-    for(int i = 1; i <= vertices; i++){
+    for(int i = 1; i <= edges; i++){
         int first_vertex;
         cout << "Enter the first Vertex " << endl;
         cin>>first_vertex;
