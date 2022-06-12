@@ -12,25 +12,29 @@ struct AVLNode
     int height;     // height of the Node
 
     // Constructor
-    AVLNode(int value){
+    AVLNode(int value)
+    {
         data = value;
         left = NULL;
         right = NULL;
     }
 };
 
-AVLNode *root = NULL; //Global pointer for the root of AVLTree
+AVLNode *root = NULL; // Global pointer for the root of AVLTree
 
 // isEmpty or not
-int isEmpty(AVLNode *root){
+int isEmpty(AVLNode *root)
+{
     // Ger root NULL tou true werna False
     return root == NULL;
 }
 
 // Postorder Traversal in AVL Tree
 
-void postorder(AVLNode *root){
-    if(root){
+void postorder(AVLNode *root)
+{
+    if (root)
+    {
         postorder(root->left);
         postorder(root->right);
         cout << root->data << " ";
@@ -45,8 +49,10 @@ void postorder(AVLNode *root){
 
 // Preorder Traversal in AVL Tree
 
-void preorder(AVLNode *root){
-    if(root){
+void preorder(AVLNode *root)
+{
+    if (root)
+    {
         cout << root->data << " ";
         preorder(root->left);
         preorder(root->right);
@@ -54,8 +60,10 @@ void preorder(AVLNode *root){
 }
 
 // inorder Traversal in AVL Tree
-void inorder(AVLNode *root){
-    if(root){
+void inorder(AVLNode *root)
+{
+    if (root)
+    {
         inorder(root->left);
         cout << root->data << " ";
         inorder(root->right);
@@ -64,7 +72,8 @@ void inorder(AVLNode *root){
 
 // Height of AVL Tree
 
-int height(AVLNode *root){
+int height(AVLNode *root)
+{
     if (!root)
         return 0;
 
@@ -73,7 +82,8 @@ int height(AVLNode *root){
 
 // Balance Factor for Node
 
-int balanceFactor(AVLNode *root){
+int balanceFactor(AVLNode *root)
+{
     if (!root)
         return 0;
 
@@ -81,22 +91,28 @@ int balanceFactor(AVLNode *root){
 }
 
 // Maximum of two integers as a helper function for height
-int max(int a, int b){
+int max(int a, int b)
+{
     return (a > b) ? a : b;
 }
 
 // Searching in AVL Tree
-int search(AVLNode *root , int key){
-    if(root == NULL){
+int search(AVLNode *root, int key)
+{
+    if (root == NULL)
+    {
         return 0;
     }
-    else if(root->data == key){
+    else if (root->data == key)
+    {
         return 1;
     }
-    else if(root->data > key){
+    else if (root->data > key)
+    {
         return search(root->right, key);
     }
-    else if(root->data < key){
+    else if (root->data < key)
+    {
         return search(root->left, key);
     }
 
@@ -105,13 +121,15 @@ int search(AVLNode *root , int key){
 
 // Finding Minimum Node of the AVL Tree
 
-AVLNode* minAVLNode(AVLNode *root){
+AVLNode *minAVLNode(AVLNode *root)
+{
     // Minimum Node is Present in the most left Node of the Tree
 
     AVLNode *p = root;
     AVLNode *temp = NULL;
 
-    while(p!=NULL){
+    while (p != NULL)
+    {
         temp = p;
         p = p->left;
     }
@@ -121,13 +139,15 @@ AVLNode* minAVLNode(AVLNode *root){
 
 // Finding Maximum Node of the AVL Tree
 
-AVLNode* maxAVLNode(AVLNode *root){
+AVLNode *maxAVLNode(AVLNode *root)
+{
     // Maximum Node is Present in the most Right Node  of the Tree
 
     AVLNode *p = root;
     AVLNode *temp = NULL;
 
-    while(p!=NULL){
+    while (p != NULL)
+    {
         temp = p;
         p = p->right;
     }
@@ -135,10 +155,10 @@ AVLNode* maxAVLNode(AVLNode *root){
     return temp;
 }
 
-
 // finding minimum Value of AVL Tree
 
-int minValueAVL(AVLNode *root){
+int minValueAVL(AVLNode *root)
+{
     AVLNode *temp = minAVLNode(root);
     return temp->data;
 }
@@ -151,32 +171,31 @@ int maxValueAVL(AVLNode *root)
     return temp->data;
 }
 
-
 // AVL Rotations
 // Rotations k names insertion k names per diay gye hain unmay krna jo hai us basis per nhi diay gye!
 // rotation ka code multiple childs ki condition ko maddenazar rkhte huay likhna hai
 
+// LL Rotation
+AVLNode *LLRotation(AVLNode *root)
+// rotate wese right per krna hai!
+{
+    // saving the new root and the lost element in case of rotation
+    AVLNode *x = root->left;
+    AVLNode *temp = x->right;
 
-// LL Rotation 
-AVLNode* LLRotation(AVLNode *root)
-    // rotate wese right per krna hai!
-    {
-        // saving the new root and the lost element in case of rotation
-        AVLNode *x = root->left;
-        AVLNode *temp = x->right;
+    // Performing rotation
+    x->right = root;
+    root->left = temp;
 
-        // Performing rotation
-        x->right = root;
-        root->left = temp;
-
-        // updating the root
-        root = x;
-        // returning the root
-        return x;
-    }
+    // updating the root
+    root = x;
+    // returning the root
+    return x;
+}
 
 // RR Rotation
-AVLNode* RRRotation(AVLNode *root){
+AVLNode *RRRotation(AVLNode *root)
+{
     // rotate wese left per krna hai!
 
     // saving the new root and the lost element in case of rotation
@@ -195,39 +214,44 @@ AVLNode* RRRotation(AVLNode *root){
     return x;
 }
 
-
 // LR Rotation
-AVLNode* LRRotation(AVLNode *root){
+AVLNode *LRRotation(AVLNode *root)
+{
     root->left = RRRotation(root->left);
     return LLRotation(root);
 }
 
 // RL Rotation
-AVLNode* RLRotation(AVLNode *root){
+AVLNode *RLRotation(AVLNode *root)
+{
     root->right = LLRotation(root->right);
     return RRRotation(root);
 }
 
 //  INSERTION in AVL Tree
 
-AVLNode* insertion(int value , AVLNode *root){
+AVLNode *insertion(int value, AVLNode *root)
+{
 
-    AVLNode *newNode = new AVLNode(value); //dynamically declaring new Node and assigning value to it through Constructor
+    AVLNode *newNode = new AVLNode(value); // dynamically declaring new Node and assigning value to it through Constructor
 
     // Insertion is just as the indertion in BST
-    if(root == NULL){
-        root = newNode; //insertion Point
-
+    if (root == NULL)
+    {
+        root = newNode; // insertion Point
     }
 
-    else if(root->data > value){
+    else if (root->data > value)
+    {
         root->left = insertion(value, root->left);
     }
-    else if (root->data < value){
+    else if (root->data < value)
+    {
         root->right = insertion(value, root->right);
     }
 
-    else{
+    else
+    {
         cout << "No duplicates Values are Allowed " << endl;
         return root;
     }
@@ -235,26 +259,31 @@ AVLNode* insertion(int value , AVLNode *root){
     // Now as the insertion is Done now to make the tree AVL (Balanced) we will perform Rotations
     int bf = balanceFactor(root);
 
-    if(bf == 2){
-        // LL 
-        if(root->left->data > newNode->data){
+    if (bf == 2)
+    {
+        // LL
+        if (root->left->data > newNode->data)
+        {
             return LLRotation(root);
         }
 
-
-        // LR 
-        if(root->left->data < newNode->data){
+        // LR
+        if (root->left->data < newNode->data)
+        {
             return LRRotation(root);
         }
     }
-    else if(bf == -2){
+    else if (bf == -2)
+    {
         // RR
-        if(root->right->data < newNode->data){
+        if (root->right->data < newNode->data)
+        {
             return RRRotation(root);
         }
 
-        //RL
-        if(root->right->data > newNode->data){
+        // RL
+        if (root->right->data > newNode->data)
+        {
             return RLRotation(root);
         }
     }
@@ -262,8 +291,9 @@ AVLNode* insertion(int value , AVLNode *root){
     return root; // in case there is no need of rotation
 }
 
-AVLNode *deleteNode(AVLNode *root, int key){
-    //!intitial Deletion is same as of BST and then after deletion we will perform Balancing to keep AVLiness Alive!
+AVLNode *deleteNode(AVLNode *root, int key)
+{
+    //! intitial Deletion is same as of BST and then after deletion we will perform Balancing to keep AVLiness Alive!
     // firstly we have to search for the node which has to be deleted
     // then we will delete it accordingly
     // There are three main cases for the deletion
@@ -292,16 +322,16 @@ AVLNode *deleteNode(AVLNode *root, int key){
         if (!root->left && !root->right)
         {
             delete root;
-
+            root = NULL; // segmentation Fault (root dangling hogya tha aur tree lost! bht dhayan rkhna hai iska)
         }
         // case 2: 1 child
-        else if (root->left == NULL)
+        else if (!root->left && root->right)
         {
             root = temp;
             root = root->right;
             delete temp;
         }
-        else if (root->right == NULL)
+        else if (!root->right && root->left)
         {
             root = temp;
             root = root->left;
@@ -321,13 +351,14 @@ AVLNode *deleteNode(AVLNode *root, int key){
         if (bf == 2)
         {
             // LL
-            if (balanceFactor(root->left) >= 0)
+            if (root->left->left)
             {
                 return LLRotation(root);
             }
 
             // LR
-            if (balanceFactor(root->left) == -1)
+
+            else
             {
                 return LRRotation(root);
             }
@@ -335,41 +366,40 @@ AVLNode *deleteNode(AVLNode *root, int key){
         else if (bf == -2)
         {
             // RR
-            if (balanceFactor(root->right) <= -0)
+            if (root->right->right)
             {
                 return RRRotation(root);
             }
 
             // RL
-            if (balanceFactor(root->right) == 1)
+            else
             {
                 return RLRotation(root);
             }
         }
-
     }
 
     return root; // in case there is no need of rotation
 }
 
+int main()
+{
 
-    int main(){
+    root = insertion(34, root);
+    root = insertion(12, root);
+    root = insertion(50, root);
+    root = insertion(10, root);
+    root = insertion(5, root);
+    root = insertion(1, root);
 
-        root = insertion(34, root);
-        root = insertion(12, root);
-        root = insertion(50, root);
-        root = insertion(10, root);
-        root = insertion(5, root);
-        root = insertion(1, root);
+    cout << "Inorder Traversal of AVL Tree is : " << endl;
 
-        cout << "Inorder Traversal of AVL Tree is : " << endl;
-        
-        inorder(root);
+    inorder(root);
 
-        root = deleteNode(root , 50);
+    root = deleteNode(root, 1);
 
-        cout << "Inorder Traversal of AVL Tree is : ";
-        inorder(root);
+    cout << "Inorder Traversal of AVL Tree is : " << endl;
+    inorder(root);
 
-        return 0;
-    }
+    return 0;
+}
