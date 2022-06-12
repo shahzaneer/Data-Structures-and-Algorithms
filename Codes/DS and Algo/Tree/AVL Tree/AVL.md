@@ -10,4 +10,7 @@
 - Therefore using AVL Tree we can make the use of binary search tree efficiently.
 
 # Time Complexity
-- The Search of AVL is `O(log h)` in the worst case.
+- The Search, insertion and deletion of AVL are `O(log h)` in the worst case.
+
+# Application of AVL Tree
+- For Searching in large Data Bases
