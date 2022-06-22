@@ -1,15 +1,15 @@
 #include <iostream>
 using namespace std;
 
-// Structure for AVL Tree's Node
+// Structure for AVL Tree's root
 
 struct AVLNode
 {
 
-    int data;       // data for AVL node
+    int data;       // data for AVL root
     AVLNode *left;  // left child
     AVLNode *right; // right child
-    int height;     // height of the Node
+    int height;     // height of the root
 
     // Constructor
     AVLNode(int value)
@@ -80,7 +80,7 @@ int height(AVLNode *root)
     return max(height(root->left), height(root->right)) + 1;
 }
 
-// Balance Factor for Node
+// Balance Factor for root
 
 int balanceFactor(AVLNode *root)
 {
@@ -119,11 +119,11 @@ int search(AVLNode *root, int key)
     return 1;
 }
 
-// Finding Minimum Node of the AVL Tree
+// Finding Minimum root of the AVL Tree
 
 AVLNode *minAVLNode(AVLNode *root)
 {
-    // Minimum Node is Present in the most left Node of the Tree
+    // Minimum root is Present in the most left root of the Tree
 
     AVLNode *p = root;
     AVLNode *temp = NULL;
@@ -137,11 +137,11 @@ AVLNode *minAVLNode(AVLNode *root)
     return temp;
 }
 
-// Finding Maximum Node of the AVL Tree
+// Finding Maximum root of the AVL Tree
 
 AVLNode *maxAVLNode(AVLNode *root)
 {
-    // Maximum Node is Present in the most Right Node  of the Tree
+    // Maximum root is Present in the most Right root  of the Tree
 
     AVLNode *p = root;
     AVLNode *temp = NULL;
@@ -233,12 +233,12 @@ AVLNode *RLRotation(AVLNode *root)
 AVLNode *insertion(int value, AVLNode *root)
 {
 
-    AVLNode *newNode = new AVLNode(value); // dynamically declaring new Node and assigning value to it through Constructor
+    AVLNode *newroot = new AVLNode(value); // dynamically declaring new root and assigning value to it through Constructor
 
     // Insertion is just as the indertion in BST
     if (root == NULL)
     {
-        root = newNode; // insertion Point
+        root = newroot; // insertion Point
     }
 
     else if (root->data > value)
@@ -262,13 +262,13 @@ AVLNode *insertion(int value, AVLNode *root)
     if (bf == 2)
     {
         // LL
-        if (root->left->data > newNode->data)
+        if (root->left->data > newroot->data)
         {
             return LLRotation(root);
         }
 
         // LR
-        if (root->left->data < newNode->data)
+        if (root->left->data < newroot->data)
         {
             return LRRotation(root);
         }
@@ -276,13 +276,13 @@ AVLNode *insertion(int value, AVLNode *root)
     else if (bf == -2)
     {
         // RR
-        if (root->right->data < newNode->data)
+        if (root->right->data < newroot->data)
         {
             return RRRotation(root);
         }
 
         // RL
-        if (root->right->data > newNode->data)
+        if (root->right->data > newroot->data)
         {
             return RLRotation(root);
         }
@@ -291,33 +291,34 @@ AVLNode *insertion(int value, AVLNode *root)
     return root; // in case there is no need of rotation
 }
 
-AVLNode *deleteNode(AVLNode *root, int key)
+AVLNode *deleteroot(AVLNode *root, int key)
 {
     //! intitial Deletion is same as of BST and then after deletion we will perform Balancing to keep AVLiness Alive!
-    // firstly we have to search for the node which has to be deleted
+    // firstly we have to search for the root which has to be deleted
     // then we will delete it accordingly
     // There are three main cases for the deletion
-    // Node with 0 child -> simply delete the node
-    // Node with 1 child -> make the Parent of node point to the child of node and delete node
-    // Node with 2 childs-> findout the inorder predeccesor(The largest element in LST) or inorder successor (The smallest element oin the RST)
-    // and copy the contents of to be deleted node and then delete the inorder predeccessor or inorder successor (which was used earlier)
+    // root with 0 child -> simply delete the root
+    // root with 1 child -> make the Parent of root point to the child of root and delete root
+    // root with 2 childs-> findout the inorder predeccesor(The largest element in LST) or inorder successor (The smallest element oin the RST)
+    // and copy the contents of to be deleted root and then delete the inorder predeccessor or inorder successor (which was used earlier)
+    AVLNode *temp = NULL;
+
     if (root == NULL)
     {
         return root;
     }
     else if (key < root->data)
     {
-        root->left = deleteNode(root->left, key);
+        root->left = deleteroot(root->left, key);
     }
     else if (key > root->data)
     {
-        root->right = deleteNode(root->right, key);
+        root->right = deleteroot(root->right, key);
     }
-    else
-    {
-        // It means that we have found our node to be deleted and now its the time to delete the node
 
-        AVLNode *temp = NULL;
+    else{
+        // It means that we have found our root to be deleted and now its the time to delete the root
+
         // case 1: 0 child
         if (!root->left && !root->right)
         {
@@ -341,8 +342,13 @@ AVLNode *deleteNode(AVLNode *root, int key)
         {
             temp = maxAVLNode(root->left);
             root->data = temp->data;
-            root->left = deleteNode(root->left, temp->data);
+            root->left = deleteroot(root->left, temp->data);
         }
+    }
+        if(temp == NULL){
+            return root;
+        }
+
 
         // Now start Balancing the root!
 
@@ -377,29 +383,98 @@ AVLNode *deleteNode(AVLNode *root, int key)
                 return RLRotation(root);
             }
         }
-    }
+    
 
     return root; // in case there is no need of rotation
 }
 
-int main()
+// deleting root
+AVLNode *deleteNodeQ(AVLNode *root, int key)
 {
+    if (root == NULL)
+        return root;
+    else if (key < root->data)
+        root->left = deleteroot(root->left, key);
+    else if (key > root->data)
+        root->right = deleteroot(root->right, key);
+    else
+    {
+        // if deleteroot has one child or zero child
+        if ((root->left == NULL) || (root->right == NULL))
+        {
+            AVLNode *temp = root->left ? root->left : root->right;
+            if (temp == NULL)
+            {
+                temp = root;
+                root = NULL;
+            }
+            else
+                *root = *temp;
+            free(temp);
+        }
+        else
+        {
+            // if deleteroot has two or more childs
+            AVLNode *temp = maxAVLNode(root->right);
+            root->data = temp->data;
+            root->right = deleteNodeQ(root->right, temp->data);
+        }
+    }
 
-    root = insertion(34, root);
-    root = insertion(12, root);
-    root = insertion(50, root);
-    root = insertion(10, root);
-    root = insertion(5, root);
-    root = insertion(1, root);
+    if (root == NULL)
+        return root;
 
-    cout << "Inorder Traversal of AVL Tree is : " << endl;
+    // updating the height of the root
+    // root->height = max(height(root->left), height(root->right)) + 1;
 
-    inorder(root);
+    // getting the balance factor
+    int balance = balanceFactor(root);
 
-    root = deleteNode(root, 1);
+    // Rotation Cases
+    // LEFT LEFT CASE
+    if (balance > 1 && key < root->left->data)
+        return LLRotation(root);
 
-    cout << "Inorder Traversal of AVL Tree is : " << endl;
-    inorder(root);
+    // LEFT RIGHT CASE
+    if (balance > 1 && key > root->left->data)
+    {
+        root->left = LLRotation(root->left);
+        return LRRotation(root);
+    }
 
-    return 0;
+    // RIHGT RIGHT CASE
+    if (balance < -1 && key > root->right->data)
+        return RRRotation(root);
+
+    // RIGHT LEFT CASE
+    if (balance < -1 && key < root->right->data)
+    {
+        return RLRotation(root);
+    }
+
+    return root;
 }
+
+        int main()
+        {
+
+            root = insertion(34, root);
+            root = insertion(12, root);
+            root = insertion(50, root);
+            root = insertion(10, root);
+            root = insertion(5, root);
+            root = insertion(1, root);
+
+            cout << "Inorder Traversal of AVL Tree is : " << endl;
+
+            preorder(root);
+            cout << endl;
+
+            cout << "After Deleting the root " << endl;
+            root = deleteNodeQ(root, 10);
+
+            cout << "Inorder Traversal of AVL Tree is : " << endl;
+            inorder(root);
+
+            return 0;
+        }
