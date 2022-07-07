@@ -49,8 +49,13 @@ void Traversal(Node *head){
 }
 
 bool isPalindrome(Node *head){
+    Node *q = head;
     Node *p = head;
-    
+
+    while(p->next!=NULL){
+        p = p->next;
+    }
+
     while(q!=NULL){
         if(p->data!=q->data){
             return false;

@@ -21,7 +21,7 @@ int main(){
 
     int arr[6] = {10, 54, 12, 7, 2, 34};
 
-    int elementFoundAtIndex = linearSearch(arr, 12, i, 6);
+    int elementFoundAtIndex = linearSearch(arr, 34, i, 6);
 
     if(elementFoundAtIndex == -1)
         cout << "Element was not found " << endl;
