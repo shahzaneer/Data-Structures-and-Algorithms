@@ -1,6 +1,8 @@
 # Data-Structures-and-Algorithms
 
-- This repository includes all the Data Structures and Algorithms I have explored till Date!
+
+
+![Data-Structure-and-Algorithms](https://socialify.git.ci/shahzaneer/Data-Structures-and-Algorithms//image?description=1&font=Raleway&forks=1&issues=1&language=1&name=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Dark)
 
 # What are Data Structures?
 
